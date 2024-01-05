@@ -1,10 +1,5 @@
 import { generateRandomString, splitText2Chunks } from "./helpers";
-import {
-  IBMMedium,
-  Montserrat,
-  SFProDisplayBold,
-  SFProDisplayMed,
-} from "./index";
+import { IBMMedium, Montserrat } from "./index";
 
 const amountInput = document.getElementById("amount");
 const timeInput = document.getElementById("time");
@@ -31,9 +26,15 @@ export const getBybitWithdrawnAndroid = (ctx, canvas) => {
     const commission = commissionInput.value;
 
     ctx.fillStyle = "rgba(255, 255, 255, 0.93)";
-    ctx.font = "bold 30px IBM Plex Sans";
+
     const measuredText = ctx.measureText(amount);
-    ctx.fillText(amount, canvas.width / 2 - measuredText.width / 2, 238);
+
+    IBMBold.load().then((font) => {
+      document.fonts.add(font);
+
+      ctx.font = "bold 30px IBM Plex Sans";
+      ctx.fillText(amount, canvas.width / 2 - measuredText.width / 2, 238);
+    });
 
     Montserrat.load().then((font) => {
       document.fonts.add(font);

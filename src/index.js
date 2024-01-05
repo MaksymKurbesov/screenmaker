@@ -10,6 +10,9 @@ export const IBMMedium = new FontFace(
   "IBM Medium",
   "url(IBMPlexSans-Medium.ttf)"
 );
+
+export const IBMBold = new FontFace("IBM Bold", "url(IBMPlexSans-Bold.ttf)");
+
 export const SFProDisplayMed = new FontFace(
   "SF Pro Display",
   "url(SF-Pro-Display-Medium.otf)"
@@ -26,6 +29,7 @@ export const Montserrat = new FontFace(
 );
 
 const getScreenButton = document.getElementById("get-screen");
+const downloadScreenButton = document.getElementById("download-screen");
 const templateInput = document.getElementById("template");
 const canvas = document.getElementById("example");
 const ctx = canvas.getContext("2d");
@@ -45,6 +49,19 @@ templateInput.addEventListener("change", (e) => {
 
 getScreenButton.addEventListener("click", () => {
   TEMPLATE_FN_MAP[templateInput.value](ctx, canvas);
+});
+
+downloadScreenButton.addEventListener("click", () => {
+  const canvas = document.getElementById("example");
+  const data = canvas.toDataURL("image/png");
+  const downloadLink = document.createElement("a");
+
+  downloadLink.href = data;
+  downloadLink.download = "screenshot.png";
+
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
 });
 
 TEMPLATE_FN_MAP[templateInput.value](ctx, canvas);
