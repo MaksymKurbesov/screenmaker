@@ -18,15 +18,16 @@ export const getBybitDepositIphone = (ctx, canvas) => {
     ctx.drawImage(img, 0, 0);
     ctx.fillStyle = "rgba(255, 255, 255, 0.93)";
 
-    let amount = `${amountInput.value} USDT`;
-    let time = timeInput.value === "" ? "2023-11-27 21:28:41" : timeInput.value;
-    let mobileTime = mobileTimeInput.value;
-    let battery = batteryInput.value;
+    const amount = `${amountInput.value} USDT`;
+    const time =
+      timeInput.value === "" ? "2023-11-27 21:28:41" : timeInput.value;
+    const mobileTime = mobileTimeInput.value;
+    const battery = batteryInput.value;
 
     IBMBold.load().then((font) => {
       document.fonts.add(font);
       ctx.font = "30px IBM Bold";
-      let measuredText = ctx.measureText(amount);
+      const measuredText = ctx.measureText(amount);
 
       ctx.fillText(amount, canvas.width / 2 - measuredText.width / 2, 237);
     });

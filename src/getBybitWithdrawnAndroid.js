@@ -27,12 +27,11 @@ export const getBybitWithdrawnAndroid = (ctx, canvas) => {
 
     ctx.fillStyle = "rgba(255, 255, 255, 0.93)";
 
-    const measuredText = ctx.measureText(amount);
-
     IBMBold.load().then((font) => {
       document.fonts.add(font);
-
       ctx.font = "30px IBM Bold";
+      const measuredText = ctx.measureText(amount);
+
       ctx.fillText(amount, canvas.width / 2 - measuredText.width / 2, 238);
     });
 
