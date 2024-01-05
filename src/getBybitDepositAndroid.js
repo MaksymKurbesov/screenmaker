@@ -17,7 +17,6 @@ export const getBybitDepositAndroid = (ctx, canvas) => {
   img.onload = function () {
     ctx.drawImage(img, 0, 0);
     ctx.fillStyle = "rgba(255, 255, 255, 0.93)";
-    ctx.font = "bold 30px IBM Plex Sans";
 
     let amount = `${amountInput.value} USDT`;
     let time = timeInput.value === "" ? "2023-11-27 21:28:41" : timeInput.value;
@@ -25,7 +24,13 @@ export const getBybitDepositAndroid = (ctx, canvas) => {
     let battery = batteryInput.value;
 
     let measuredText = ctx.measureText(amount);
-    ctx.fillText(amount, canvas.width / 2 - measuredText.width / 2, 237);
+
+    IBMBold.load().then((font) => {
+      document.fonts.add(font);
+
+      ctx.font = "bold 30px IBM Plex Sans";
+      ctx.fillText(amount, canvas.width / 2 - measuredText.width / 2, 237);
+    });
 
     Montserrat.load().then((font) => {
       document.fonts.add(font);
