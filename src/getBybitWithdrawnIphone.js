@@ -1,5 +1,5 @@
 import { generateRandomString, splitText2Chunks } from "./helpers";
-import { IBMMedium, SFProDisplayBold, SFProDisplayMed } from "./index";
+import { IBMBold, IBMMedium, SFProDisplayBold, SFProDisplayMed } from "./index";
 
 const amountInput = document.getElementById("amount");
 const timeInput = document.getElementById("time");
