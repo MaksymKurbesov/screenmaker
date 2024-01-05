@@ -23,12 +23,11 @@ export const getBybitDepositIphone = (ctx, canvas) => {
     let mobileTime = mobileTimeInput.value;
     let battery = batteryInput.value;
 
-    let measuredText = ctx.measureText(amount);
-
     IBMBold.load().then((font) => {
       document.fonts.add(font);
+      ctx.font = "30px IBM Bold";
+      let measuredText = ctx.measureText(amount);
 
-      ctx.font = "bold 30px IBM Plex Sans";
       ctx.fillText(amount, canvas.width / 2 - measuredText.width / 2, 237);
     });
 

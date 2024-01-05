@@ -32,7 +32,7 @@ export const getBybitWithdrawnAndroid = (ctx, canvas) => {
     IBMBold.load().then((font) => {
       document.fonts.add(font);
 
-      ctx.font = "bold 30px IBM Plex Sans";
+      ctx.font = "30px IBM Bold";
       ctx.fillText(amount, canvas.width / 2 - measuredText.width / 2, 238);
     });
 
