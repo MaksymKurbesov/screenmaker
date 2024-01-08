@@ -1,55 +1,57 @@
 import "./index.css";
-import { getBybitDepositIphone } from "./getBybitDepositIphone";
-import { getBingxDepositIphone } from "./getBingxDepositIphone";
-import { getBybitWithdrawnIphone } from "./getBybitWithdrawnIphone";
-import { getBingxWithdrawnIphone } from "./getBingxWithdrawnIphone";
-import { getBybitDepositAndroid } from "./getBybitDepositAndroid";
-import { getBybitWithdrawnAndroid } from "./getBybitWithdrawnAndroid";
-
-export const IBMMedium = new FontFace(
-  "IBM Medium",
-  "url(IBMPlexSans-Medium.ttf)"
-);
-
-export const IBMBold = new FontFace("IBM Bold", "url(IBMPlexSans-Bold.ttf)");
-
-export const SFProDisplayMed = new FontFace(
-  "SF Pro Display",
-  "url(SF-Pro-Display-Medium.otf)"
-);
-export const SFProDisplayBold = new FontFace(
-  "SF Pro Display Bold",
-  "url(SF-Pro-Display-Bold.otf)"
-);
-
-export const Rubik = new FontFace("Rubik", "url(Rubik-Regular.ttf)");
-export const Montserrat = new FontFace(
-  "Montserrat",
-  "url(Montserrat-Medium.ttf)"
-);
+import {
+  addFontsToDocument,
+  getCurrentDateTime,
+  getDataFromUser,
+  toggleInput,
+} from "./helpers";
+import { getTemplateByType } from "./getTemplateByType";
+import { FONTS } from "./fonts";
 
 const getScreenButton = document.getElementById("get-screen");
 const downloadScreenButton = document.getElementById("download-screen");
 const templateInput = document.getElementById("template");
-const canvas = document.getElementById("example");
-const ctx = canvas.getContext("2d");
+const commissionInput = document.querySelector(".commission");
 
-const TEMPLATE_FN_MAP = {
-  "bybit-deposit-iphone": getBybitDepositIphone,
-  "bybit-withdrawn-iphone": getBybitWithdrawnIphone,
-  "bybit-deposit-android": getBybitDepositAndroid,
-  "bybit-withdrawn-android": getBybitWithdrawnAndroid,
-  "bingx-deposit-iphone": getBingxDepositIphone,
-  "bingx-withdrawn-iphone": getBingxWithdrawnIphone,
-};
+// const toggleCanvasButton = document.getElementById("toggle-canvas");
+// const canvas = document.getElementById("example");
+
+await addFontsToDocument(FONTS);
+
+// let CANVAS_VIEW_STATUS = true;
+
+document.fonts.ready.then(() => {
+  getTemplateByType(templateInput.value, {
+    amount: "",
+    time: getCurrentDateTime(true),
+    wallet: "TW2FSbnmHnv1PVXbuoqqQELeQck1DuoWZg",
+    mobileTime: getCurrentDateTime(),
+    commission: "1",
+  });
+});
 
 templateInput.addEventListener("change", (e) => {
-  TEMPLATE_FN_MAP[e.target.value](ctx, canvas);
+  const action = e.target.value.split("-")[1];
+  const isWithdrawn = action === "withdrawn";
+
+  toggleInput(commissionInput, isWithdrawn);
+
+  getTemplateByType(e.target.value, getDataFromUser());
 });
 
 getScreenButton.addEventListener("click", () => {
-  TEMPLATE_FN_MAP[templateInput.value](ctx, canvas);
+  getTemplateByType(templateInput.value, getDataFromUser());
 });
+
+// toggleCanvasButton.addEventListener("click", () => {
+//   if (CANVAS_VIEW_STATUS) {
+//     canvas.style.display = "none";
+//   } else {
+//     canvas.style.display = "block";
+//   }
+//
+//   CANVAS_VIEW_STATUS = !CANVAS_VIEW_STATUS;
+// });
 
 downloadScreenButton.addEventListener("click", () => {
   const canvas = document.getElementById("example");
@@ -63,5 +65,3 @@ downloadScreenButton.addEventListener("click", () => {
   downloadLink.click();
   document.body.removeChild(downloadLink);
 });
-
-TEMPLATE_FN_MAP[templateInput.value](ctx, canvas);

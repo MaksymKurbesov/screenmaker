@@ -1,4 +1,4 @@
-import { Rubik, SFProDisplayBold } from "./index";
+import { Rubik, SFProDisplayBold } from "./fonts";
 import {
   createCustomString,
   drawRoundedRect,
