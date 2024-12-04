@@ -24,7 +24,7 @@ document.fonts.ready.then(() => {
   getTemplateByType(templateInput.value, {
     amount: "",
     time: getCurrentDateTime(true),
-    wallet: "TW2FSbnmHnv1PVXbuoqqQELeQck1DuoWZg",
+    wallet: "TFtHEwUSYvaepwhiSRAaTqBZf7BwSUqXYw",
     mobileTime: getCurrentDateTime(),
     commission: "1",
   });
