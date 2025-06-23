@@ -43,15 +43,6 @@ getScreenButton.addEventListener("click", () => {
   getTemplateByType(templateInput.value, getDataFromUser());
 });
 
-// toggleCanvasButton.addEventListener("click", () => {
-//   if (CANVAS_VIEW_STATUS) {
-//     canvas.style.display = "none";
-//   } else {
-//     canvas.style.display = "block";
-//   }
-//
-//   CANVAS_VIEW_STATUS = !CANVAS_VIEW_STATUS;
-// });
 
 downloadScreenButton.addEventListener("click", () => {
   const canvas = document.getElementById("example");
